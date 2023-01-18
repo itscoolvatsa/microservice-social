@@ -11,10 +11,6 @@ import (
 
 func main() {
 	config, _ := config2.LoadConfig(".")
-	println("mongo")
-	if "" == config.MONGOURI {
-		config.MONGOURI = "mongodb://localhost:27017/"
-	}
 	println(config.MONGOURI)
 
 	repo := mongodb.New(config.MONGOURI)

@@ -31,5 +31,5 @@ func (r *Response) ConvertMap() map[string]any {
 
 // SendResponse method to send the data
 func (r *Response) SendResponse(ctx *gin.Context) {
-	ctx.JSON(r.StatusCode, r.ConvertMap())
+	ctx.AbortWithStatusJSON(r.StatusCode, r.ConvertMap())
 }

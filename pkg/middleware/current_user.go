@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"errors"
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"microservice/pkg/errors"
+	errresp "microservice/pkg/response/error"
 	"microservice/pkg/token"
 	"net/http"
 	"strings"
@@ -14,22 +14,22 @@ func CurrentUser(symmetricKey string) gin.HandlerFunc {
 		authorizationHeader := c.GetHeader("Authorization")
 
 		if len(authorizationHeader) == 0 {
-			err := errors.New("authorization header is not Provided")
-			c.AbortWithStatusJSON(http.StatusUnauthorized, err)
+			resp := errresp.New(http.StatusUnauthorized, false, errors.ErrNoAuthHeader)
+			resp.SendResponse(c)
 			return
 		}
 
 		fields := strings.Fields(authorizationHeader)
 		if len(fields) < 2 {
-			err := errors.New("invalid authorization header format")
-			c.AbortWithStatusJSON(http.StatusUnauthorized, err)
+			resp := errresp.New(http.StatusUnauthorized, false, errors.ErrInvalidAuthHeader)
+			resp.SendResponse(c)
 			return
 		}
 
 		authorizationType := strings.ToLower(fields[0])
 		if authorizationType != "bearer" {
-			err := fmt.Errorf("unsupported authorization type %s", authorizationType)
-			c.AbortWithStatusJSON(http.StatusUnauthorized, err)
+			resp := errresp.New(http.StatusUnauthorized, false, errors.ErrInvalidAuthData)
+			resp.SendResponse(c)
 			return
 		}
 
@@ -37,15 +37,19 @@ func CurrentUser(symmetricKey string) gin.HandlerFunc {
 		maker, err := token.New(symmetricKey)
 
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "something went wrong while verifying"})
+			resp := errresp.New(http.StatusUnauthorized, false, errors.ErrInternalServer)
+			resp.SendResponse(c)
+			return
 		}
 
 		payload, err := maker.VerifyToken(accessToken)
 
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, err)
+			resp := errresp.New(http.StatusUnauthorized, false, errors.ErrInvalidAuthData)
+			resp.SendResponse(c)
 			return
 		}
+
 		c.Set("access", payload)
 		c.Next()
 	}
