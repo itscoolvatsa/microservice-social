@@ -5,9 +5,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"microservice/auth/internal/controller"
 	"microservice/pkg/middleware"
-	jsonresp "microservice/pkg/response/json"
 	"microservice/pkg/token"
-	"net/http"
 )
 
 // Handler for user service http gateway.
@@ -29,15 +27,6 @@ func New(ctrl *controller.Controller, symmetricKey string) (*Handler, error) {
 }
 
 var validate = validator.New()
-
-// SignOutUser Logs out the user
-func (h *Handler) SignOutUser() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Request.Header.Set("Authorization", "")
-		resp := jsonresp.New(http.StatusAccepted, true, "", "logged out successfully")
-		resp.SendResponse(c)
-	}
-}
 
 func (h *Handler) UserRoutes(incomingRoutes *gin.Engine, symmetricKey string, NATS_URL string) {
 	incomingRoutes.POST("/users/signup", h.SignupUser(NATS_URL))

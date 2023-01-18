@@ -2,7 +2,6 @@ package neo4j
 
 import (
 	"context"
-	"fmt"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 	"microservice/graph/pkg/model"
 )
@@ -26,11 +25,8 @@ func New(URI string) *Repository {
 
 // AddRelationShip adding a new relationship for following another user
 func (r *Repository) AddRelationShip(ctx context.Context, followerId string, followingId string) error {
-	//	TODO
 	session := r.driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
 	defer session.Close(ctx)
-
-	//(lebron:PLAYER{name:"Russell Westbrook", age: 33, number: 0, height: 1.91, weight: 91})
 
 	_, err := session.ExecuteWrite(ctx, func(transaction neo4j.ManagedTransaction) (any, error) {
 		result, err := transaction.Run(ctx,
@@ -59,7 +55,7 @@ func (r *Repository) AddUser(ctx context.Context, user *model.User) (bool, error
 	session := r.driver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
 	defer session.Close(ctx)
 
-	newUser, err := session.ExecuteWrite(ctx, func(transaction neo4j.ManagedTransaction) (any, error) {
+	_, err := session.ExecuteWrite(ctx, func(transaction neo4j.ManagedTransaction) (any, error) {
 		result, err := transaction.Run(ctx,
 			"CREATE (u:User {user_id: $user_id , name: $name })", map[string]any{
 				"user_id": user.UserId,
@@ -78,8 +74,6 @@ func (r *Repository) AddUser(ctx context.Context, user *model.User) (bool, error
 	if err != nil {
 		return false, err
 	}
-
-	fmt.Println(newUser)
 
 	return true, nil
 }

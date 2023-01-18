@@ -2,7 +2,6 @@ package natshandler
 
 import (
 	"context"
-	"fmt"
 	"microservice/graph/internal/controller"
 	"microservice/graph/internal/repository/natsmsg"
 	"microservice/graph/pkg/model"
@@ -21,8 +20,6 @@ func New(ctrl *controller.Controller) (*natsMsg, error) {
 
 func (h *natsMsg) ReceivesMessage(data string) {
 	h.ctrl.ReceivesMessage(data, func(res *natsmsg.NatsUser) {
-		str := fmt.Sprint(res)
-		fmt.Println(str + "handler function wala")
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 		defer cancel()
 		var user model.User
