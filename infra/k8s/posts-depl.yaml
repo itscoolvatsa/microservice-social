@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+  labels:
+    app: posts-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: posts
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Never
+          env:
+            - name: MONGO_URI
+              value: "mongodb://posts-mongo-srv:27017/posts"
+            - name: HTTP_SERVER_ADDRESS
+              value: "0.0.0.0:8080"
+            - name: TOKEN_SYMMETRIC_KEY
+              value: "SwszwLvpT5hKVNDwW7YJVEbLACOymVTQ"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

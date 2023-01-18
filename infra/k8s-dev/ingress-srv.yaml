@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: auth-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  # ingressClassName: nginx
+  rules:
+    - host: demo.myapp.me
+      http:
+        paths:
+          - pathType: Prefix
+            path: /users/?(.*)
+            backend:
+              service:
+                name: auth-srv
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /posts/?(.*)
+            backend:
+              service:
+                name: posts-srv
+                port:
+                  number: 8080

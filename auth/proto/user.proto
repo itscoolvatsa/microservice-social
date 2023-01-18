@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth.gen;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "microservice/auth/gen";
+
+message User {
+	string ID = 1;
+	string Name = 2;
+	string Email = 3;
+	string Password = 4;
+	google.protobuf.Timestamp CreatedAt = 5;
+	google.protobuf.Timestamp UpdatedAt = 6;
+}

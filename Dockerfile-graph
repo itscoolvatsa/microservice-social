@@ -1,0 +1,20 @@
+FROM golang:1.19-alpine3.16 AS builder
+
+WORKDIR /app
+
+# pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
+COPY ./go.mod ./go.sum ./
+RUN go mod download && go mod verify
+
+COPY ./ ./
+RUN go build -o main ./graph/app/main.go
+
+#Run Stage
+From alpine:3.16
+
+WORKDIR /app
+COPY --from=builder /app/main .
+COPY ./graph/app.env .
+
+EXPOSE 8080
+CMD ["/app/main"]

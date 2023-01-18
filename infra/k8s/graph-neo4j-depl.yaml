@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: graph-neo4j-depl
+  labels:
+    app: graph-neo4j
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graph-neo4j
+  template:
+    metadata:
+      labels:
+        app: graph-neo4j
+    spec:
+      containers:
+        - imagePullPolicy: IfNotPresent
+          name: graph-neo4j
+          image: neo4j
+          env:
+            - name: NEO4J_AUTH
+              value: none
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graph-neo4j-srv
+spec:
+  selector:
+    app: graph-neo4j
+  ports:
+    - name: gui
+      protocol: TCP
+      port: 7474
+      targetPort: 7474
+    - name: db
+      protocol: TCP
+      port: 7687
+      targetPort: 7687

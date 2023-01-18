@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth.gen;
+
+import "user.proto";
+
+option go_package = "microservice/auth/gen";
+
+message SignInUserRequest {
+	string Email = 2;
+	string Password = 3;
+};
+
+message SignInUserResponse {
+	User user = 1;
+};

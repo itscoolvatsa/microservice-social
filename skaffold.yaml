@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: microservice
+build:
+  artifacts:
+  - image: auth
+    docker:
+      dockerfile: Dockerfile-auth
+  - image: posts
+    docker:
+      dockerfile: Dockerfile-posts
+  - image: graph
+    docker:
+      dockerfile: Dockerfile-graph
+
+manifests:
+  rawYaml:
+  - infra/k8s/*
+  - infra/k8s-dev/*
