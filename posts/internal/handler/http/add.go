@@ -2,8 +2,10 @@ package http
 
 import (
 	"context"
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"microservice/pkg/errors"
+	errresp "microservice/pkg/response/error"
+	jsonresp "microservice/pkg/response/json"
 	"microservice/pkg/token"
 	"microservice/posts/pkg/model"
 	"net/http"
@@ -13,15 +15,15 @@ import (
 // AddPost handles post request for signup
 func (h *Handler) AddPost() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 		payload := c.MustGet("access").(*token.Payload)
-		fmt.Printf("%v", payload)
 
 		var post model.Post
 
 		//convert the JSON data coming from postman to something that golang understands
 		if err := c.BindJSON(&post); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			errresp.New(http.StatusBadRequest, false, err).
+				SendResponse(c)
 			return
 		}
 
@@ -29,7 +31,8 @@ func (h *Handler) AddPost() gin.HandlerFunc {
 		validationErr := validate.Struct(post)
 
 		if validationErr != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": validationErr.Error()})
+			errresp.New(http.StatusBadRequest, false, validationErr).
+				SendResponse(c)
 			return
 		}
 
@@ -43,10 +46,12 @@ func (h *Handler) AddPost() gin.HandlerFunc {
 		err := h.ctrl.AddPost(ctx, &post)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occurred while adding the post"})
+			errresp.New(http.StatusBadRequest, false, errors.ErrInternalServer).
+				SendResponse(c)
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"message": "post added successfully"})
+		jsonresp.New(http.StatusAccepted, true, post, "post added successfully").
+			SendResponse(c)
 	}
 }

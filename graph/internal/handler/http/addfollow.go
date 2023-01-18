@@ -22,6 +22,7 @@ func (h *HttpHandler) AddFollow() gin.HandlerFunc {
 			return
 		}
 
-		jsonresp.New(http.StatusAccepted, true, "", "relationship established")
+		jsonresp.New(http.StatusAccepted, true, "", "relationship established").
+			SendResponse(c)
 	}
 }
