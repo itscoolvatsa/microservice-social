@@ -7,6 +7,9 @@ import (
 	"microservice/auth/internal/repository/natsmsg"
 	"microservice/auth/internal/repository/password"
 	"microservice/auth/pkg/model"
+	"microservice/pkg/errors"
+	errresp "microservice/pkg/response/error"
+	jsonresp "microservice/pkg/response/json"
 	"net/http"
 	"time"
 )
@@ -14,13 +17,15 @@ import (
 // SignupUser handles post request for signup
 func (h *Handler) SignupUser(NATS_URL string) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 
 		var user model.User
 
 		//convert the JSON data coming from postman to something that golang understands
 		if err := c.BindJSON(&user); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			resp := errresp.New(http.StatusBadRequest, false, err)
+			resp.SendResponse(c)
 			return
 		}
 
@@ -28,7 +33,8 @@ func (h *Handler) SignupUser(NATS_URL string) gin.HandlerFunc {
 		validationErr := validate.Struct(user)
 
 		if validationErr != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": validationErr.Error()})
+			resp := errresp.New(http.StatusBadRequest, false, validationErr)
+			resp.SendResponse(c)
 			return
 		}
 
@@ -36,16 +42,16 @@ func (h *Handler) SignupUser(NATS_URL string) gin.HandlerFunc {
 		count, err := h.ctrl.CountUser(ctx, user.Email)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occurred while checking for the email"})
+			resp := errresp.New(http.StatusBadRequest, false, errors.ErrInternalServer)
+			resp.SendResponse(c)
 			return
 		}
 
 		if count > 0 {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "user already exists"})
+			resp := errresp.New(http.StatusBadRequest, false, errors.ErrAlreadyExists)
+			resp.SendResponse(c)
 			return
 		}
-
-		defer cancel()
 
 		// hashing the password before saving into the database
 		hashedPassword, _ := password.HashPassword(user.Password)
@@ -58,7 +64,8 @@ func (h *Handler) SignupUser(NATS_URL string) gin.HandlerFunc {
 		userId, err := h.ctrl.AddUser(ctx, &user)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occurred while checking for the email"})
+			resp := errresp.New(http.StatusBadRequest, false, errors.ErrInternalServer)
+			resp.SendResponse(c)
 			return
 		}
 
@@ -70,6 +77,7 @@ func (h *Handler) SignupUser(NATS_URL string) gin.HandlerFunc {
 			Name:   user.Name,
 		})
 
-		c.JSON(http.StatusOK, gin.H{"message": "user signed up successfully"})
+		resp := jsonresp.New(http.StatusBadRequest, true, "", "user signed up successfully")
+		resp.SendResponse(c)
 	}
 }

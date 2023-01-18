@@ -1,8 +1,8 @@
 package http
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
+	jsonresp "microservice/pkg/response/json"
 	"microservice/pkg/token"
 	"net/http"
 )
@@ -10,7 +10,7 @@ import (
 func (h *Handler) CurrentUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		payload := c.MustGet("access").(*token.Payload)
-		fmt.Printf("%v", payload)
-		c.JSON(http.StatusOK, gin.H{"user": payload})
+		resp := jsonresp.New(http.StatusOK, true, payload, "user logged in")
+		resp.SendResponse(c)
 	}
 }

@@ -6,11 +6,11 @@ import "github.com/gin-gonic/gin"
 type Response struct {
 	StatusCode int
 	Status     bool
-	Message    string
+	Message    error
 }
 
 // New constructor for ErrorResponse
-func New(StatusCode int, Status bool, Message string) *Response {
+func New(StatusCode int, Status bool, Message error) *Response {
 	return &Response{
 		StatusCode,
 		Status,
@@ -24,7 +24,7 @@ func (r *Response) ConvertMap() map[string]any {
 
 	data["status"] = r.Status
 	data["data"] = r.StatusCode
-	data["error"] = r.Message
+	data["error"] = r.Message.Error()
 
 	return data
 }

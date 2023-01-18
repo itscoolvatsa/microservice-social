@@ -5,6 +5,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"microservice/auth/internal/controller"
 	"microservice/pkg/middleware"
+	jsonresp "microservice/pkg/response/json"
 	"microservice/pkg/token"
 	"net/http"
 )
@@ -33,7 +34,8 @@ var validate = validator.New()
 func (h *Handler) SignOutUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Request.Header.Set("Authorization", "")
-		c.JSON(http.StatusAccepted, gin.H{"message": "logged out successfully"})
+		resp := jsonresp.New(http.StatusAccepted, true, "", "logged out successfully")
+		resp.SendResponse(c)
 	}
 }
 

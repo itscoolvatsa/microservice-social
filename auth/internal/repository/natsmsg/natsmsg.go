@@ -39,13 +39,9 @@ type NatsUser struct {
 // SendMessage sends the message to the other services
 func (s NatServer) SendMessage(user NatsUser) {
 	// Publish the message
-	println("before send")
 	if err := s.server.Publish("user", &user); err != nil {
 		log.Fatal(err)
 	}
-
-	println("after send")
-	//s.server.Close()
 }
 
 func (s NatServer) ReceivesMessage() {
