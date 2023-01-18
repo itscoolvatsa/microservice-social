@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"microservice/auth/internal/repository/password"
 	"microservice/auth/pkg/model"
+	errresp "microservice/pkg/response/error"
+	jsonresp "microservice/pkg/response/json"
 	"net/http"
 	"time"
 )
@@ -19,7 +21,8 @@ func (h *Handler) SignInUser() gin.HandlerFunc {
 
 		//convert the JSON data coming from postman to something that golang understands
 		if err := c.BindJSON(&providedUser); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			resp := errresp.New(http.StatusBadRequest, false, err.Error())
+			resp.SendResponse(c)
 			return
 		}
 
@@ -27,7 +30,8 @@ func (h *Handler) SignInUser() gin.HandlerFunc {
 		storedUser, err := h.ctrl.FindUser(ctx, providedUser.Email)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occurred while checking for the email"})
+			resp := errresp.New(http.StatusBadRequest, false, "email or password is wrong")
+			resp.SendResponse(c)
 			return
 		}
 		defer cancel()
@@ -35,18 +39,24 @@ func (h *Handler) SignInUser() gin.HandlerFunc {
 		check := password.ComparePassword(storedUser.Password, providedUser.Password)
 
 		if !check {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "email or password is wrong"})
+			resp := errresp.New(http.StatusBadRequest, false, "email or password is wrong")
+			resp.SendResponse(c)
 			return
 		}
 
 		accessToken, _, err := h.tokenMaker.CreateToken(storedUser.Email, storedUser.ID.Hex(), time.Hour)
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "error occurred while token generation"})
+			resp := errresp.New(http.StatusBadRequest, false, "something went wrong")
+			resp.SendResponse(c)
 			return
 		}
 
 		accessToken = "Bearer " + accessToken
 		c.Header("Authorization", accessToken)
-		c.JSON(http.StatusOK, gin.H{"message": storedUser})
+		//c.JSON(http.StatusOK, gin.H{"message": storedUser})
+
+		data := storedUser
+		resp := jsonresp.New(http.StatusOK, true, data, "signed in successfully")
+		resp.SendResponse(c)
 	}
 }

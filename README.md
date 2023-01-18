@@ -63,3 +63,34 @@ PowerShell
 cmd
 
 > @FOR /f "tokens=\*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+`
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "name": "John Smith",
+        "email": "john.smith@example.com",
+        "age": 35,
+        "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "zip": "12345"
+        },
+        "phoneNumbers": [
+            {
+                "type": "home",
+                "number": "555-555-1234"
+            },
+            {
+                "type": "work",
+                "number": "555-555-5678"
+            }
+        ],
+        "active": true
+    },
+    "message": "User retrieved successfully"
+}
+
+`

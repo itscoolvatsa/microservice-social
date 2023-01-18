@@ -35,7 +35,7 @@ func CurrentUser(symmetricKey string) gin.HandlerFunc {
 
 		accessToken := fields[1]
 		maker, err := token.New(symmetricKey)
-		
+
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "something went wrong while verifying"})
 		}
