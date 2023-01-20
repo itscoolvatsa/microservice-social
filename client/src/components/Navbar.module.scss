@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    height: 70px;
+    box-shadow: 0 4px 2px -2px gray;
+
+    .left {
+        display: flex;
+        align-items: center;
+        svg {
+            color: green;
+            height: 25px;
+            margin-right: 1rem;
+        }
+        span {
+            color: rgb(0, 85, 255);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    }
+
+    .middle {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px;
+
+        input {
+            border: none;
+            width: 300px;
+            background-color: transparent;
+            color: gray;
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+}

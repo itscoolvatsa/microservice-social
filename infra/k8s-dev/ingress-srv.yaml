@@ -24,3 +24,10 @@ spec:
                 name: posts-srv
                 port:
                   number: 8080
+#          - pathType: Prefix
+#            path: /?(.*)
+#            backend:
+#              service:
+#                name: client-srv
+#                port:
+#                  number: 3000

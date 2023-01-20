@@ -13,6 +13,9 @@ build:
   - image: graph
     docker:
       dockerfile: Dockerfile-graph
+#  - image: client
+#    docker:
+#      dockerfile: Dockerfile-client
 
 manifests:
   rawYaml:
