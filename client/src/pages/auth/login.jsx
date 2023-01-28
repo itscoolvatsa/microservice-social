@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import style from "./login.module.scss";
-import { AllInclusive } from "@mui/icons-material";
-import Router from "next/router";
+import {AllInclusive} from "@mui/icons-material";
+import {signIn} from "next-auth/react";
 
 const Login = () => {
     const [inputs, setInputs] = useState({
@@ -11,24 +11,25 @@ const Login = () => {
     const [err, setErr] = useState(null);
 
     const handleChange = (e) => {
-        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        setInputs((prev) => ({...prev, [e.target.name]: e.target.value}));
     };
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            await login(inputs);
-            Router.push("/");
-        } catch (err) {
-            setErr(err.response.data);
-        }
+        const status = await signIn("credentials", {
+            redirect: false,
+            email: inputs.email,
+            password: inputs.password,
+            callbackUrl: "/",
+        });
+
+        if (status.ok) router.push(status.url);
     };
 
     return (
         <main className={style.login}>
             <div className={style.main}>
                 <div className={style.header}>
-                    <AllInclusive />
+                    <AllInclusive/>
                     <h1>Micro Social</h1>
                     <p>Enjoy Being Social</p>
                 </div>

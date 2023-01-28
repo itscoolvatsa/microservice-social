@@ -9,16 +9,16 @@ import "google/api/annotations.proto";
 option go_package = "microservice/auth/gen";
 
 service Auth {
-	rpc SignupUser(SignupUserRequest) returns (SignupUserResponse) {
-		option (google.api.http) = {
-			post: "/v1/create_user"
-			body: "*"
-		};
-	}
-	rpc LoginUser(SignInUserRequest) returns (SignInUserResponse) {
-		option (google.api.http) = {
-			post: "/v1/login_user"
-			body: "*"
-		};
-	}
+  rpc SignupUser(SignupUserRequest) returns (SignupUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/create_user"
+      body: "*"
+    };
+  }
+  rpc LoginUser(SignInUserRequest) returns (SignInUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/login_user"
+      body: "*"
+    };
+  }
 }

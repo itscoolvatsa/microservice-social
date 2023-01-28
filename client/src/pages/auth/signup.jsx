@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import style from "./login.module.scss";
-import { AllInclusive } from "@mui/icons-material";
+import {AllInclusive} from "@mui/icons-material";
 import useRequest from "/hooks/use-request";
 
 const Signup = () => {
@@ -13,7 +13,7 @@ const Signup = () => {
     const [err, setErr] = useState(null);
 
     const handleChange = (e) => {
-        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        setInputs((prev) => ({...prev, [e.target.name]: e.target.value}));
     };
 
     const handleLogin = async (e) => {
@@ -21,7 +21,7 @@ const Signup = () => {
         await doRequest();
     };
 
-    const { doRequest, errors } = useRequest({
+    const {doRequest, errors} = useRequest({
         url: "http://127.0.0.1:8080/users/signup",
         method: "post",
         body: inputs,
@@ -32,7 +32,7 @@ const Signup = () => {
         <main className={style.login}>
             <div className={style.main}>
                 <div className={style.header}>
-                    <AllInclusive />
+                    <AllInclusive/>
                     <h1>Micro Social</h1>
                     <p>Enjoy Being Social</p>
                 </div>

@@ -1,12 +1,15 @@
 package http
 
 import (
+	"bytes"
 	"context"
 	"github.com/gin-gonic/gin"
+	"io"
 	"microservice/pkg/errors"
 	errresp "microservice/pkg/response/error"
 	jsonresp "microservice/pkg/response/json"
 	"microservice/pkg/token"
+	"microservice/pkg/util"
 	"microservice/posts/pkg/model"
 	"net/http"
 	"time"
@@ -18,32 +21,42 @@ func (h *Handler) AddPost() gin.HandlerFunc {
 		ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 		payload := c.MustGet("access").(*token.Payload)
 
-		var post model.Post
+		file, _, err := c.Request.FormFile("file")
 
-		//convert the JSON data coming from postman to something that golang understands
-		if err := c.BindJSON(&post); err != nil {
+		if err != nil {
 			errresp.New(http.StatusBadRequest, false, err).
 				SendResponse(c)
 			return
 		}
+		buf := bytes.NewBuffer(nil)
+		_, err = io.Copy(buf, file)
 
-		//validate the data based on user struct
-		validationErr := validate.Struct(post)
-
-		if validationErr != nil {
-			errresp.New(http.StatusBadRequest, false, validationErr).
+		if err != nil {
+			errresp.New(http.StatusInternalServerError, false, errors.ErrInternalServer).
 				SendResponse(c)
-			return
+		}
+		name := util.RandomString(10)
+
+		fid, err := h.ctrl.AddMedia(name, buf.Bytes())
+
+		if err != nil {
+			errresp.New(http.StatusInternalServerError, false, errors.ErrInternalServer).
+				SendResponse(c)
 		}
 
+		var post model.Post
+
+		caption := c.Request.FormValue("caption")
 		defer cancel()
 
 		post.CreatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 		post.UpdatedAt, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
+		post.ImageId = fid
+		post.Caption = caption
 		post.UserId = payload.UserId
 
 		//	saving the suer to the database
-		err := h.ctrl.AddPost(ctx, &post)
+		err = h.ctrl.AddPost(ctx, &post)
 
 		if err != nil {
 			errresp.New(http.StatusBadRequest, false, errors.ErrInternalServer).

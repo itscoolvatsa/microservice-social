@@ -4,6 +4,7 @@ metadata:
   name: auth-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 8m
 spec:
   # ingressClassName: nginx
   rules:
@@ -11,14 +12,21 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: /users/?(.*)
+            path: /api/users/?(.*)
             backend:
               service:
                 name: auth-srv
                 port:
                   number: 8080
           - pathType: Prefix
-            path: /posts/?(.*)
+            path: /api/posts/?(.*)
+            backend:
+              service:
+                name: posts-srv
+                port:
+                  number: 8080
+          - pathType: Prefix
+            path: /api/graph/?(.*)
             backend:
               service:
                 name: posts-srv

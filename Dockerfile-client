@@ -1,7 +1,18 @@
-FROM node:alpine
+FROM node:18-alpine as builder
 
 WORKDIR /app
-COPY client/package.json .
+COPY client/package.json client/package-lock.json ./
 RUN npm install
 COPY ./client .
-CMD ["npm", "run", "dev"]
+RUN npm run build
+
+FROM node:18-alpine as runner
+WORKDIR /app
+COPY --from=builder /client/package.json .
+COPY --from=builder /client/package-lock.json .
+COPY --from=builder /client/public ./public
+COPY --from=builder /client/.next/standalone ./public
+COPY --from=builder /client/.next/static ./.next/static
+
+EXPOSE 3000
+ENTRYPOINT ["node", "server.js"]

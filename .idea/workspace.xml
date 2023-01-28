@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ca36288-7634-466c-aefc-cffb0eb4527c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/microservice.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/protoeditor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile-client" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile-client" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/app/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth/app/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/internal/handler/http/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth/internal/handler/http/http.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/pb/swagger/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/auth/pb/swagger/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/pb/swagger/oauth2-redirect.html" beforeDir="false" afterPath="$PROJECT_DIR$/auth/pb/swagger/oauth2-redirect.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/pb/swagger/swagger-initializer.js" beforeDir="false" afterPath="$PROJECT_DIR$/auth/pb/swagger/swagger-initializer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/pb/swagger/swagger-ui.css" beforeDir="false" afterPath="$PROJECT_DIR$/auth/pb/swagger/swagger-ui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/proto/auth_service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/auth/proto/auth_service.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/proto/signin_user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/auth/proto/signin_user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/proto/signup_user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/auth/proto/signup_user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/proto/user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/auth/proto/user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/build-client.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/build-client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/use-request.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/use-request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/next.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/next.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/thirteen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/thirteen.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/vercel.svg" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/vercel.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/_document.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/auth/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/auth/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/auth/signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/auth/signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph/internal/handler/http/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/graph/internal/handler/http/http.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/k8s-dev/ingress-srv.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/infra/k8s-dev/ingress-srv.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/k8s/auth-depl.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/infra/k8s/auth-depl.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/k8s/auth-mongo-depl.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/infra/k8s/auth-mongo-depl.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/k8s/graph-depl.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/infra/k8s/graph-depl.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/k8s/nats-depl.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/infra/k8s/nats-depl.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/internal/controller/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/posts/internal/controller/controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/internal/handler/http/add.go" beforeDir="false" afterPath="$PROJECT_DIR$/posts/internal/handler/http/add.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/internal/handler/http/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/posts/internal/handler/http/http.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/internal/repository/mongodb/mongodb.go" beforeDir="false" afterPath="$PROJECT_DIR$/posts/internal/repository/mongodb/mongodb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/pkg/model/post.go" beforeDir="false" afterPath="$PROJECT_DIR$/posts/pkg/model/post.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skaffold.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/skaffold.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///snap/go/10030" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2KiRCSSU7VKV9swjT3iCa1YrtbP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/aditya/code/microservice-social/media&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/media/app" />
+      <recent name="$PROJECT_DIR$/media/internal/controller" />
+      <recent name="$PROJECT_DIR$/media/internal/handler" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build microservice/media/app" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="microservice-social" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="microservice/media/app" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/media/app/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build microservice/media/app" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

@@ -7,10 +7,10 @@ import "user.proto";
 option go_package = "microservice/auth/gen";
 
 message SignInUserRequest {
-	string Email = 2;
-	string Password = 3;
+  string Email = 2;
+  string Password = 3;
 };
 
 message SignInUserResponse {
-	User user = 1;
+  User user = 1;
 };

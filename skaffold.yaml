@@ -1,23 +1,55 @@
+#apiVersion: skaffold/v4beta1
+#kind: Config
+#metadata:
+#  name: microservice
+#build:
+#  local:
+#    push: false
+#  artifacts:
+#    - image: auth
+#      docker:
+#        dockerfile: Dockerfile-auth
+#    - image: posts
+#      docker:
+#        dockerfile: Dockerfile-posts
+#    - image: graph
+#      docker:
+#        dockerfile: Dockerfile-graph
+##    - image: client
+##      docker:
+##        dockerfile: Dockerfile-client
+#
+#manifests:
+#  rawYaml:
+#    - infra/k8s/*
+#    - infra/k8s-dev/*
+
 apiVersion: skaffold/v4beta1
 kind: Config
 metadata:
   name: microservice
 build:
+  local:
+    push: false
   artifacts:
-  - image: auth
-    docker:
-      dockerfile: Dockerfile-auth
-  - image: posts
-    docker:
-      dockerfile: Dockerfile-posts
-  - image: graph
-    docker:
-      dockerfile: Dockerfile-graph
-#  - image: client
-#    docker:
-#      dockerfile: Dockerfile-client
+    - image: auth
+      docker:
+        dockerfile: Dockerfile-auth
 
+    - image: posts
+      docker:
+        dockerfile: Dockerfile-posts
+
+    - image: graph
+      docker:
+        dockerfile: Dockerfile-graph
+#    - image: client
+#      docker:
+#        dockerfile: Dockerfile-client
+
+deploy:
+  statusCheckDeadlineSeconds: 60
 manifests:
   rawYaml:
-  - infra/k8s/*
-  - infra/k8s-dev/*
+    - infra/k8s/*
+    - infra/k8s-dev/*
